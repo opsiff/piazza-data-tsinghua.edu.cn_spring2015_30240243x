@@ -58,7 +58,7 @@ function init(){
     $.ajax({
         type : "get",
         cache : false,
-        async : false, 
+//         async : false, 
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = eval("(" + data + ")"); // 把string转化为json
@@ -76,7 +76,7 @@ function init(){
     $.ajax({
         type : "get",
         cache : false,
-        async : false, 
+//         async : false, 
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = eval("(" + data + ")"); // 把string转化为json
@@ -90,7 +90,7 @@ function init(){
     $.ajax({
         type : "get",
         cache : false,
-        async : false, 
+//         async : false, 
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = eval("(" + data + ")"); // 把string转化为json
@@ -119,7 +119,7 @@ function quickSelect(tags_arg){
     $.ajax({
         type : "get",
         cache : false,
-        async : false, 
+//         async : false, 
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
 
@@ -176,7 +176,7 @@ function gen_multi_selector(obj,tags_arg){
     $.ajax({
         type : "get",
         cache : false,
-        async : false, 
+//         async : false, 
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = eval("(" + data + ")"); // 把string转化为json
@@ -295,7 +295,7 @@ function clickLi(cid)
     $.ajax({
         type : "get",
         cache : false,
-        async : false, 
+//         async : false, 
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = eval("(" + data + ")"); // 把string转化为json
@@ -317,7 +317,7 @@ function click_tags(label){
     $.ajax({
         type : "get",
         cache : false,
-        async : false, 
+//         async : false, 
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = eval("(" + data + ")"); // 把string转化为json
@@ -338,7 +338,7 @@ function click_select_label(obj){
     $.ajax({
         type : "get",
         cache : false,
-        async : false, 
+//         async : false, 
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = eval("(" + data + ")"); // 把string转化为json
@@ -621,7 +621,7 @@ function upd_feed(value,parent)
     $.ajax({
         type : "get",
         cache : false,
-        async : false, 
+//         async : false, 
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json=find_feed(data,IdArray,parent);
