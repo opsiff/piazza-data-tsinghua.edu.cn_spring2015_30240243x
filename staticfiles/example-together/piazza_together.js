@@ -54,7 +54,7 @@ function init(){
     });
 
     //页面加载时feed部分显示的是my_feed的内容
-    url_github="https://raw.githubusercontent.com/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x/master/data/piazza-data-filter/piazza_my_feed.json";
+    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/piazza_my_feed.json";
     $.ajax({
         type : "get",
         cache : false,
