@@ -90,6 +90,7 @@ function init(){
     $.ajax({
         type : "get",
         cache : false,
+        async : false, 
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = eval("(" + data + ")"); // 把string转化为json
