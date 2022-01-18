@@ -7,7 +7,7 @@
  */
 $(document).ready(function(){
     //获取url，检查是否有参数，如果有参数，则直接根据参数进行多级筛选。如果没有参数，则正常加载
-    var url = parent.window.location.search;
+    var url = decodeURIComponent(window.location.search);
     var args = {};
     //url有参数
     if (url.indexOf('?') != -1) {
@@ -77,7 +77,7 @@ function cidSelect(cids_arg){
     url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/piazza_my_feed.json";
     $.ajax({
         type : "get",
-        cache : false,
+        cache : true,
         url : url_github , // 请求地址
         async : false,
         success : function(data) { // ajax执行成功后执行的方法
@@ -94,7 +94,7 @@ function cidSelect(cids_arg){
     url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data/"+cid+".json";
     $.ajax({
         type : "get",
-        cache : false,
+        cache : true,
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = data;
@@ -109,7 +109,7 @@ function cidSelect(cids_arg){
     url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/piazza_my_feed.json";
     $.ajax({
         type : "get",
-        cache : false,
+        cache : true,
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = data;
@@ -143,7 +143,7 @@ function init(){
     url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/piazza_my_feed.json";
     $.ajax({
         type : "get",
-        cache : false,
+        cache : true,
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = data;
@@ -160,7 +160,7 @@ function init(){
     url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data/1.json";
     $.ajax({
         type : "get",
-        cache : false,
+        cache : true,
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = data;
@@ -173,7 +173,7 @@ function init(){
     url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/piazza_my_feed.json";
     $.ajax({
         type : "get",
-        cache : false,
+        cache : true,
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = data;
@@ -201,7 +201,7 @@ function quickSelect(tags_arg){
     url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/piazza_my_feed.json";
     $.ajax({
         type : "get",
-        cache : false,
+        cache : true,
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
 
@@ -257,7 +257,7 @@ function gen_multi_selector(obj,tags_arg){
     url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/filter_feed_"+label +".json";
     $.ajax({
         type : "get",
-        cache : false,
+        cache : true,
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = data;
@@ -375,7 +375,7 @@ function clickLi(cid)
     url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data/"+cid+".json";
     $.ajax({
         type : "get",
-        cache : false,
+        cache : true,
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = data;
@@ -403,7 +403,7 @@ function click_tags(label){
     url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/filter_feed_"+label +".json";
     $.ajax({
         type : "get",
-        cache : false,
+        cache : true,
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = data;
@@ -423,7 +423,7 @@ function click_select_label(obj){
     url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/filter_feed_"+label +".json";
     $.ajax({
         type : "get",
-        cache : false,
+        cache : true,
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json = data;
@@ -444,8 +444,8 @@ function click_select_label(obj){
             var ID="#"+label;
             $(ID).html(html_select);
             let url = new URL(window.location);
-            url.searchParams.delete("tags");
-            window.history.pushState('','', url.href+"&tags="+encodeURI([...document.querySelectorAll('select')].map(e => e.options[e.selectedIndex].text).join(",")));
+            url.searchParams.set("tags", encodeURI([...document.querySelectorAll('select')].map(e => e.options[e.selectedIndex].text).join(",")));
+            window.history.pushState('','', url);
         }
     });
 
@@ -707,7 +707,7 @@ function upd_feed(value,parent)
     url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/filter_feed_"+parent+".json";
     $.ajax({
         type : "get",
-        cache : false,
+        cache : true,
         url : url_github , // 请求地址
         success : function(data) { // ajax执行成功后执行的方法
             var data_json=find_feed(data,IdArray,parent);
@@ -716,8 +716,8 @@ function upd_feed(value,parent)
             var html_feed = template_feed(data_json);
             $("#feed").html(html_feed);
             let url = new URL(window.location);
-            url.searchParams.delete("tags");
-            window.history.pushState('','', url.href+"&tags="+encodeURI([...document.querySelectorAll('select')].map(e => e.options[e.selectedIndex].text).join(",")));
+            url.searchParams.set("tags", encodeURI([...document.querySelectorAll('select')].map(e => e.options[e.selectedIndex].text).join(",")));
+            window.history.pushState('','', url);
         }
     })
 
