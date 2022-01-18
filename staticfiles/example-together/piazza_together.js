@@ -373,7 +373,7 @@ function clickLi(cid)
         }
     });
     // url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data/"+cid+".json";
-    url_github=window.location.protocol+window.location.host+window.location.pathname+'?&cids='+cid;
+    url_github=window.location.pathname+'?&cids='+cid;
     window.location.href=url_github;
     // $.ajax({
     //     type : "get",
