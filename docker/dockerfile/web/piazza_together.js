@@ -11,8 +11,8 @@ $(document).ready(function(){
     var args = {};
     //url有参数
     if (url.indexOf('?') != -1) {
-        var str = url.substr(1);
-        var arglist = str.split('&');
+        var str = url.substr(1);// 
+        var arglist = str.split('&');// 从&处分割
         for (var i in arglist) {
             argstr = arglist[i];
             if (argstr != null & argstr != '') {
@@ -24,14 +24,31 @@ $(document).ready(function(){
                 args[key].push(decodeURI(value));
             }
         }
-        var tags=args["tags"];
-        //参数“tags”对应的所有的标签存放于数组tags_arg中
-        var tags_arg=tags[0].split(",");
-        //当前url包含参数，直接根据参数进行一次筛选
-        if(tags_arg.length >0){
-           //根据参数进行快速筛选
-            quickSelect(tags_arg);
+        if (args["tags"]!=undefined && args["cids"]==undefined){
+            var tags=args["tags"];
+            //参数“tags”对应的所有的标签存放于数组tags_arg中
+            var tags_arg=tags[0].split(",");
+            //当前url包含参数，直接根据参数进行一次筛选
+            if(tags_arg.length >0){
+            //根据参数进行快速筛选
+                quickSelect(tags_arg);
+            }
         }
+        else if (args["cids"]!=undefined && args["tags"]==undefined ){
+            var cids=args["cids"];
+            //参数“cids”对应的所有的标签存放于数组cids_arg中
+            var cids_arg=cids[0].split(",");
+            //当前url包含参数，直接根据参数进行一次筛选
+            if(cids_arg.length >0){
+            //根据参数进行初始化
+                cidSelect(cids_arg);
+            }
+        }
+        else {
+            // 同时
+            init();
+        }
+        
     }
     //url不含参数，正常加载
     else{
@@ -39,7 +56,76 @@ $(document).ready(function(){
     }
 
 });
+/***
+ * 当url中有参数时，根据参数解析对应的json
+ * @param cids_arg
+ */
+function cidSelect(cids_arg){
+    //注册一个比较大小的Helper,判断v1是否等于于v2
+    Handlebars.registerHelper("compare",function(v1,v2,options){
+        if(v1==v2){
+            //满足添加继续执行
+            return options.fn(this);
+        }
+        else{
+            //不满足条件执行{{else}}部分
+            return options.inverse(this);
+        }
+    });
+    
+    //页面加载时feed部分显示的是my_feed的内容
+    url_github="data/piazza-data-filter/piazza_my_feed.json";
+    $.ajax({
+        type : "get",
+        cache : false,
+        url : url_github , // 请求地址
+        async : false,
+        success : function(data) { // ajax执行成功后执行的方法
+            var data_json = data;
+            var source_feed = $("#feed-template").html();
+            var template_feed = Handlebars.compile(source_feed);
+            var html_feed = template_feed(data_json);
+            $("#feed").html(html_feed);
+        }
+    });
+    var cid=cids_arg[0];
+    var source = $("#page-center-template").html();
+    var template = Handlebars.compile(source);
+    url_github="data/piazza-data/"+cid+".json";
+    $.ajax({
+        type : "get",
+        cache : false,
+        url : url_github , // 请求地址
+        success : function(data) { // ajax执行成功后执行的方法
+            var data_json = data;
+            var html = template(data_json);  // json数据传送给html模板
+            $("#page_center").html(html);
+            
+            $('#toPiazza').attr("href","https://piazza.com/class/i5j09fnsl7k5x0?cid="+cid);
+             }
+    });
 
+    //页面加载时popular_tags_bar部分显示的是popular tags的内容 ，导航栏显示第一级下拉菜单
+    url_github="data/piazza-data-filter/piazza_my_feed.json";
+    $.ajax({
+        type : "get",
+        cache : false,
+        url : url_github , // 请求地址
+        success : function(data) { // ajax执行成功后执行的方法
+            var data_json = data;
+            var source_popular = $("#popular-tags-bar-template").html();
+            var template_popular = Handlebars.compile(source_popular);
+            var html_popular = template_popular(data_json);
+            $("#popular_tags_bar").html(html_popular);
+
+            var source_select = $("#select-linkage-template").html();
+            var template_select = Handlebars.compile(source_select);
+            var html_select = template_select(data_json);
+            $("#top_bar").html(html_select);
+
+        }
+    });
+}
 function init(){
     //注册一个比较大小的Helper,判断v1是否等于于v2
     Handlebars.registerHelper("compare",function(v1,v2,options){
@@ -257,9 +343,9 @@ function gen_multi_selector(obj,tags_arg){
             }
 
             }
-            if(IdArray[0]){
-                clickLi(IdArray[0])
-            }
+            // if(IdArray[0]){
+            //     clickLi(IdArray[0])
+            // }
 
 
         }
@@ -286,19 +372,21 @@ function clickLi(cid)
             return options.inverse(this);
         }
     });
-    url_github="data/piazza-data/"+cid+".json";
-    $.ajax({
-        type : "get",
-        cache : false,
-        url : url_github , // 请求地址
-        success : function(data) { // ajax执行成功后执行的方法
-            var data_json = data;
-            var html = template(data_json);  // json数据传送给html模板
-            $("#page_center").html(html);
+    // url_github="data/piazza-data/"+cid+".json";
+    url_github=window.location.pathname+'?&cids='+cid;
+    window.location.href=url_github;
+    // $.ajax({
+    //     type : "get",
+    //     cache : false,
+    //     url : url_github , // 请求地址
+    //     success : function(data) { // ajax执行成功后执行的方法
+    //         var data_json = data;
+    //         var html = template(data_json);  // json数据传送给html模板
+    //         $("#page_center").html(html);
             
-            $('#toPiazza').attr("href","https://piazza.com/class/i5j09fnsl7k5x0?cid="+cid);
-             }
-    });
+    //         $('#toPiazza').attr("href","https://piazza.com/class/i5j09fnsl7k5x0?cid="+cid);
+    //          }
+    // });
 }
 
 
@@ -649,33 +737,20 @@ function find_feed(data,IdArray,parent){
                 //复制data_json.result.feed[j]有对应的属性和值到新的json对象 data_json_new中
                 for(var key in feed){
                     if(typeof(feed[key])=="object"){
-
                         data_json_new.result.feed[i][key]=[];
                         for(var key2 in feed[key]){
                             if(feed[key][key2]!=parent)
                             {
-
                                 data_json_new.result.feed[i][key][key2]=feed[key][key2];
-
                             }
-
                         }
-
                     }
                     else{
-
                         data_json_new.result.feed[i][key]=feed[key];
                     }
-
-
                 }
-
             }
-
         }
     }
-
     return data_json_new;
-
-
 }

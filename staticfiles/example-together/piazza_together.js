@@ -57,7 +57,7 @@ $(document).ready(function(){
 
 });
 /***
- * 当url中有参数时，根据参数快速进行多级筛选
+ * 当url中有参数时，根据参数解析对应的json
  * @param cids_arg
  */
 function cidSelect(cids_arg){
