@@ -443,7 +443,9 @@ function click_select_label(obj){
             var html_select = template_select(next_data);
             var ID="#"+label;
             $(ID).html(html_select);
-
+            let url = new URL(window.location);
+            url.searchParams.delete("tags");
+            window.history.pushState('','', url.href+"&tags="+encodeURI([...document.querySelectorAll('select')].map(e => e.options[e.selectedIndex].text).join(",")));
         }
     });
 
@@ -713,7 +715,9 @@ function upd_feed(value,parent)
             var template_feed = Handlebars.compile(source_feed);
             var html_feed = template_feed(data_json);
             $("#feed").html(html_feed);
-
+            let url = new URL(window.location);
+            url.searchParams.delete("tags");
+            window.history.pushState('','', url.href+"&tags="+encodeURI([...document.querySelectorAll('select')].map(e => e.options[e.selectedIndex].text).join(",")));
         }
     })
 
