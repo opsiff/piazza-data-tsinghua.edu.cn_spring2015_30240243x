@@ -86,6 +86,16 @@ function cidSelect(cids_arg){
             var template_feed = Handlebars.compile(source_feed);
             var html_feed = template_feed(data_json);
             $("#feed").html(html_feed);
+
+            var source_popular = $("#popular-tags-bar-template").html();
+            var template_popular = Handlebars.compile(source_popular);
+            var html_popular = template_popular(data_json);
+            $("#popular_tags_bar").html(html_popular);
+
+            var source_select = $("#select-linkage-template").html();
+            var template_select = Handlebars.compile(source_select);
+            var html_select = template_select(data_json);
+            $("#top_bar").html(html_select);
         }
     });
     var cid=cids_arg[0];
@@ -106,25 +116,7 @@ function cidSelect(cids_arg){
     });
 
     //页面加载时popular_tags_bar部分显示的是popular tags的内容 ，导航栏显示第一级下拉菜单
-    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/piazza_my_feed.json";
-    $.ajax({
-        type : "get",
-        cache : true,
-        url : url_github , // 请求地址
-        success : function(data) { // ajax执行成功后执行的方法
-            var data_json = data;
-            var source_popular = $("#popular-tags-bar-template").html();
-            var template_popular = Handlebars.compile(source_popular);
-            var html_popular = template_popular(data_json);
-            $("#popular_tags_bar").html(html_popular);
-
-            var source_select = $("#select-linkage-template").html();
-            var template_select = Handlebars.compile(source_select);
-            var html_select = template_select(data_json);
-            $("#top_bar").html(html_select);
-
-        }
-    });
+    
 }
 function init(){
     //注册一个比较大小的Helper,判断v1是否等于于v2
@@ -151,6 +143,15 @@ function init(){
             var template_feed = Handlebars.compile(source_feed);
             var html_feed = template_feed(data_json);
             $("#feed").html(html_feed);
+            var source_popular = $("#popular-tags-bar-template").html();
+            var template_popular = Handlebars.compile(source_popular);
+            var html_popular = template_popular(data_json);
+            $("#popular_tags_bar").html(html_popular);
+
+            var source_select = $("#select-linkage-template").html();
+            var template_select = Handlebars.compile(source_select);
+            var html_select = template_select(data_json);
+            $("#top_bar").html(html_select);
         }
     });
 
@@ -170,25 +171,7 @@ function init(){
 
 
     //页面加载时popular_tags_bar部分显示的是popular tags的内容 ，导航栏显示第一级下拉菜单
-    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/piazza_my_feed.json";
-    $.ajax({
-        type : "get",
-        cache : true,
-        url : url_github , // 请求地址
-        success : function(data) { // ajax执行成功后执行的方法
-            var data_json = data;
-            var source_popular = $("#popular-tags-bar-template").html();
-            var template_popular = Handlebars.compile(source_popular);
-            var html_popular = template_popular(data_json);
-            $("#popular_tags_bar").html(html_popular);
-
-            var source_select = $("#select-linkage-template").html();
-            var template_select = Handlebars.compile(source_select);
-            var html_select = template_select(data_json);
-            $("#top_bar").html(html_select);
-
-        }
-    });
+    
 }
 /***
  * 当url中有参数时，根据参数快速进行多级筛选
