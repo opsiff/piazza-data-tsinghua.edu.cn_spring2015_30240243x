@@ -24,7 +24,7 @@ $(document).ready(function(){
                 args[key].push(decodeURI(value));
             }
         }
-        if (args["tags"]!=undefined){
+        if (args["tags"]!=undefined && args["cids"]==undefined){
             var tags=args["tags"];
             //参数“tags”对应的所有的标签存放于数组tags_arg中
             var tags_arg=tags[0].split(",");
@@ -34,7 +34,7 @@ $(document).ready(function(){
                 quickSelect(tags_arg);
             }
         }
-        if (args["cids"]!=undefined){
+        else if (args["cids"]!=undefined && args["tags"]==undefined ){
             var cids=args["cids"];
             //参数“cids”对应的所有的标签存放于数组cids_arg中
             var cids_arg=cids[0].split(",");
@@ -44,6 +44,10 @@ $(document).ready(function(){
                 cidSelect(cids_arg);
             }
         }
+        else {
+            // 同时
+            init();
+        }
         
     }
     //url不含参数，正常加载
@@ -52,6 +56,10 @@ $(document).ready(function(){
     }
 
 });
+/***
+ * 当url中有参数时，根据参数快速进行多级筛选
+ * @param cids_arg
+ */
 function cidSelect(cids_arg){
     //注册一个比较大小的Helper,判断v1是否等于于v2
     Handlebars.registerHelper("compare",function(v1,v2,options){
@@ -335,9 +343,9 @@ function gen_multi_selector(obj,tags_arg){
             }
 
             }
-            if(IdArray[0]){
-                clickLi(IdArray[0])
-            }
+            // if(IdArray[0]){
+            //     clickLi(IdArray[0])
+            // }
 
 
         }
