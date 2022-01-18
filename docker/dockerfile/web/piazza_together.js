@@ -635,7 +635,7 @@ function upd_feed(value,parent)
  * @returns json对象，本次筛选结果的json对象
  */
 function find_feed(data,IdArray,parent){
-    var data_json = eval("(" + data + ")");//把data转化为json对象
+    var data_json = data;
     var data_json_new={}; //创建一个新的json对象"data_json_new"
     data_json_new.result={};//为对象添加属性"result",它的值也是一个对象
     data_json_new.result.feed=[];//添加属性"feed",是一个数组
