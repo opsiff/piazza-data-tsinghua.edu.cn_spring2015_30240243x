@@ -372,19 +372,21 @@ function clickLi(cid)
             return options.inverse(this);
         }
     });
-    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data/"+cid+".json";
-    $.ajax({
-        type : "get",
-        cache : false,
-        url : url_github , // 请求地址
-        success : function(data) { // ajax执行成功后执行的方法
-            var data_json = data;
-            var html = template(data_json);  // json数据传送给html模板
-            $("#page_center").html(html);
+    // url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data/"+cid+".json";
+    url_github=window.location.protocol+window.location.host+window.location.pathname+'?&cids='+cid;
+    window.location.href=url_github;
+    // $.ajax({
+    //     type : "get",
+    //     cache : false,
+    //     url : url_github , // 请求地址
+    //     success : function(data) { // ajax执行成功后执行的方法
+    //         var data_json = data;
+    //         var html = template(data_json);  // json数据传送给html模板
+    //         $("#page_center").html(html);
             
-            $('#toPiazza').attr("href","https://piazza.com/class/i5j09fnsl7k5x0?cid="+cid);
-             }
-    });
+    //         $('#toPiazza').attr("href","https://piazza.com/class/i5j09fnsl7k5x0?cid="+cid);
+    //          }
+    // });
 }
 
 
