@@ -74,7 +74,7 @@ function cidSelect(cids_arg){
     });
     
     //页面加载时feed部分显示的是my_feed的内容
-    url_github="data/piazza-data-filter/piazza_my_feed.json";
+    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/piazza_my_feed.json";
     $.ajax({
         type : "get",
         cache : false,
@@ -91,7 +91,7 @@ function cidSelect(cids_arg){
     var cid=cids_arg[0];
     var source = $("#page-center-template").html();
     var template = Handlebars.compile(source);
-    url_github="data/piazza-data/"+cid+".json";
+    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data/"+cid+".json";
     $.ajax({
         type : "get",
         cache : false,
@@ -106,7 +106,7 @@ function cidSelect(cids_arg){
     });
 
     //页面加载时popular_tags_bar部分显示的是popular tags的内容 ，导航栏显示第一级下拉菜单
-    url_github="data/piazza-data-filter/piazza_my_feed.json";
+    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/piazza_my_feed.json";
     $.ajax({
         type : "get",
         cache : false,
@@ -140,7 +140,7 @@ function init(){
     });
 
     //页面加载时feed部分显示的是my_feed的内容
-    url_github="data/piazza-data-filter/piazza_my_feed.json";
+    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/piazza_my_feed.json";
     $.ajax({
         type : "get",
         cache : false,
@@ -157,7 +157,7 @@ function init(){
     //页面加载时page_center部分显示的是cid=1的内容,即piazza的欢迎页面
     var source = $("#page-center-template").html();
     var template = Handlebars.compile(source);
-    url_github="data/piazza-data/1.json";
+    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data/1.json";
     $.ajax({
         type : "get",
         cache : false,
@@ -170,7 +170,7 @@ function init(){
 
 
     //页面加载时popular_tags_bar部分显示的是popular tags的内容 ，导航栏显示第一级下拉菜单
-    url_github="data/piazza-data-filter/piazza_my_feed.json";
+    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/piazza_my_feed.json";
     $.ajax({
         type : "get",
         cache : false,
@@ -198,7 +198,7 @@ function quickSelect(tags_arg){
     //第一个参数作为第一级筛选的标签。
     var label=tags_arg[0];
     //页面加载时popular_tags_bar部分显示的是popular tags的内容 ，导航栏显示第一级下拉菜单
-    url_github="data/piazza-data-filter/piazza_my_feed.json";
+    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/piazza_my_feed.json";
     $.ajax({
         type : "get",
         cache : false,
@@ -254,7 +254,7 @@ function gen_multi_selector(obj,tags_arg){
     //获取第一级select选中的标签
     var opt = obj.options[obj.selectedIndex]
     var label=opt.text;
-    url_github="data/piazza-data-filter/filter_feed_"+label +".json";
+    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/filter_feed_"+label +".json";
     $.ajax({
         type : "get",
         cache : false,
@@ -372,7 +372,7 @@ function clickLi(cid)
             return options.inverse(this);
         }
     });
-    url_github="data/piazza-data/"+cid+".json";
+    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data/"+cid+".json";
     $.ajax({
         type : "get",
         cache : false,
@@ -400,7 +400,7 @@ function clickLi(cid)
 //点击popular部分列出的标签，显示对应的feed部分
 function click_tags(label){
 
-    url_github="data/piazza-data-filter/filter_feed_"+label +".json";
+    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/filter_feed_"+label +".json";
     $.ajax({
         type : "get",
         cache : false,
@@ -420,7 +420,7 @@ function click_select_label(obj){
 
     var opt = obj.options[obj.selectedIndex]
     var label=opt.text;
-    url_github="data/piazza-data-filter/filter_feed_"+label +".json";
+    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/filter_feed_"+label +".json";
     $.ajax({
         type : "get",
         cache : false,
@@ -704,7 +704,7 @@ function upd_feed(value,parent)
 
     var IdArray = value.split(",");
 
-    url_github="data/piazza-data-filter/filter_feed_"+parent+".json";
+    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data-filter/filter_feed_"+parent+".json";
     $.ajax({
         type : "get",
         cache : false,
