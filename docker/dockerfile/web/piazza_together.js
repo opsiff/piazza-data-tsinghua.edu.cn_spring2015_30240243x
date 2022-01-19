@@ -367,7 +367,7 @@ function clickLi(cid)
             
             $('#toPiazza').attr("href","https://piazza.com/class/i5j09fnsl7k5x0?cid="+cid);
             let url = new URL(window.location);
-            url.searchParams.set("cid",cid);
+            url.searchParams.set("cids",cid);
             window.history.pushState('','', url);
         },
         // handle a non-successful response
