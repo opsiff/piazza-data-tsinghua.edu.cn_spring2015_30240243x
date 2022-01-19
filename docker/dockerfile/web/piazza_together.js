@@ -46,7 +46,19 @@ $(document).ready(function(){
         }
         else {
             // 同时
-            init();
+            var tags=args["tags"];
+            //参数“tags”对应的所有的标签存放于数组tags_arg中
+            var tags_arg=tags[0].split(",");
+            //当前url包含参数，直接根据参数进行一次筛选
+            var cids=args["cids"];
+            //参数“cids”对应的所有的标签存放于数组cids_arg中
+            var cids_arg=cids[0].split(",");
+            //当前url包含参数，直接根据参数进行一次筛选
+            if(tags_arg.length >0 && cids_arg.length >0){
+            // //根据参数进行快速筛选
+            //     quickSelect(tags_arg);
+                cidSelect(cids_arg);
+            }
         }
         
     }
