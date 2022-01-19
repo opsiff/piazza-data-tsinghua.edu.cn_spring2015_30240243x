@@ -46,7 +46,19 @@ $(document).ready(function(){
         }
         else {
             // 同时
-            init();
+            var tags=args["tags"];
+            //参数“tags”对应的所有的标签存放于数组tags_arg中
+            var tags_arg=tags[0].split(",");
+            //当前url包含参数，直接根据参数进行一次筛选
+            var cids=args["cids"];
+            //参数“cids”对应的所有的标签存放于数组cids_arg中
+            var cids_arg=cids[0].split(",");
+            //当前url包含参数，直接根据参数进行一次筛选
+            if(tags_arg.length >0 && cids_arg.length >0){
+            //根据参数进行快速筛选
+                quickSelect(tags_arg);
+                partcidSelect(cids_arg);
+            }
         }
         
     }
@@ -56,6 +68,40 @@ $(document).ready(function(){
     }
 
 });
+/***
+ * 当url中有参数时，根据参数解析对应的json
+ * @param cids_arg
+ */
+function partcidSelect(cids_arg){
+    //注册一个比较大小的Helper,判断v1是否等于于v2
+    Handlebars.registerHelper("compare",function(v1,v2,options){
+        if(v1==v2){
+            //满足添加继续执行
+            return options.fn(this);
+        }
+        else{
+            //不满足条件执行{{else}}部分
+            return options.inverse(this);
+        }
+    });
+    
+    var cid=cids_arg[0];
+    var source = $("#page-center-template").html();
+    var template = Handlebars.compile(source);
+    url_github="https://cdn.jsdelivr.net/gh/xyongcn/piazza-data-tsinghua.edu.cn_spring2015_30240243x@master/data/piazza-data/"+cid+".json";
+    $.ajax({
+        type : "get",
+        cache : true,
+        url : url_github , // 请求地址
+        success : function(data) { // ajax执行成功后执行的方法
+            var data_json = data;
+            var html = template(data_json);  // json数据传送给html模板
+            $("#page_center").html(html);
+            
+            $('#toPiazza').attr("href","https://piazza.com/class/i5j09fnsl7k5x0?cid="+cid);
+             }
+    });
+}
 /***
  * 当url中有参数时，根据参数解析对应的json
  * @param cids_arg
